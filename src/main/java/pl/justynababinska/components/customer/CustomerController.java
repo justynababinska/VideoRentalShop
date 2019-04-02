@@ -44,8 +44,8 @@ public class CustomerController {
 	}
 
 	public void removeCustomer() {
-		System.out.println("Usuwanie kategorii");
-		System.out.println("Podaj id kategorii, którą chcesz usunąć");
+		System.out.println("Usuwanie klienta");
+		System.out.println("Podaj id klienta, którego chcesz usunąć");
 		long id = sc.nextLong();
 		Optional<Customer> customer = customerRepository.findById(id);
 		customer.ifPresentOrElse(customerRepository::delete,

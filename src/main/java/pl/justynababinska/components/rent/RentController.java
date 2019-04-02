@@ -26,16 +26,16 @@ public class RentController {
 		this.customerRepository = customerRepository;
 		this.filmRepository = filmRepository;
 	}
-	
+
 	@Transactional
-    public void rentFilmToCustomer() {
-        try {
-            rent();
-        } catch(RentException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-	
+	public void rentFilmToCustomer() {
+		try {
+			rent();
+		} catch (RentException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
 	private void rent() {
 		System.out.println("Podaj pesel klienta:");
 		String customerPesel = sc.nextLine();
@@ -44,16 +44,16 @@ public class RentController {
 		Optional<Customer> customer = customerRepository.findByPesel(customerPesel);
 		Optional<Film> film = filmRepository.findById(filmId);
 		if (customer.isPresent())
-			film.ifPresentOrElse(dev -> {
-				if (dev.getQuantity() > dev.getCustomers().size())
-					dev.addCustomer(customer.get());
-				else
-					throw new RentException("Brak wolnych urządzeń o wskazanym id");
+			film.ifPresentOrElse(f -> {
+				if (f.getQuantity() > f.getCustomers().size()) {
+					f.addCustomer(customer.get());
+					System.out.println("Wypożyczono film");
+				} else
+					throw new RentException("Brak wolnych filmów o wskazanym id");
 			}, () -> {
 				throw new RentException("Brak filmu o wskazanym id");
 			});
 		else
 			throw new RentException("Brak klienta o wskazanym id");
-	}
-
+		}
 }

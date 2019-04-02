@@ -31,20 +31,20 @@ public class FilmController {
         String name = sc.nextLine();
         List<Film> film = filmRepository.findAllByNameContainingIgnoreCase(name);
         if(film.isEmpty())
-            System.out.println("Brak urządzeń o wskazanej nazwie");
+            System.out.println("Brak filmu o wskazanej nazwie");
         else {
-            System.out.println("Znalezione urządzenia:");
+            System.out.println("Znalezione filmy:");
             film.forEach(System.out::println);
         }
     } 
     
 	@Transactional
 	public void addFilm() {
-		System.out.println("Dodawanie klienta");
+		System.out.println("\nDodawanie filmu");
 		try {
 		Film film = readFilm();
 		filmRepository.save(film);
-		System.out.println("Dodano klienta: " + film);
+		System.out.println("Dodano film: " + film);
 		} catch (CategoryNotFoundException ex) {
 			System.err.print("Nie dodano filmu." + ex.getMessage());
 		}
@@ -60,6 +60,7 @@ public class FilmController {
 		film.setQuantity(sc.nextInt());
 		System.out.println("Podaj cenę filmu:");
 		film.setPrice(sc.nextDouble());
+		sc.nextLine();
 		System.out.println("Podaj kategorię filmu(nazwa)");
 		String categoryName = sc.nextLine();
 		Optional<Category> category = categoryRepository.findByNameIgnoreCase(categoryName);
