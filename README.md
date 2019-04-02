@@ -12,14 +12,14 @@ The application was created to improve knowledge through the training.
 
 Available functionalities:
 
-adding new films,
-adding new categories,
-adding new clients,
-searching films by name,
-movie rental,
-removing films
-removing categories
-removing clients.
+- adding new films,
+- adding new categories,
+- adding new clients,
+- searching films by name,
+- movie rental,
+- removing films
+- removing categories
+- removing clients.
 
 ## Screenshots
 ![screnshots](./addCategory.png)
